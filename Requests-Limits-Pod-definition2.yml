@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+    name: tomcat-pod
+    labels:
+       type: appserver
+spec:
+  containers:
+      - name: mytomcat
+        image: tomee
+        ports:
+          - containerPort: 8080
+            hostPort: 9090
+        resources:
+           requests:
+               cpu: "64m"
+               memory: "100Mi"
+           limits:
+               cpu: "128m"
+               memory: "200Mi"
+...

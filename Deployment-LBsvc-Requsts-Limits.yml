@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: jenkins-deployment
+    labels:
+       type: ci-cd
+       author: intelliqit
+spec:
+   replicas: 6
+   selector:
+        matchLabels:
+            type: ci-cd
+            author: intelliqit
+   template:
+       metadata:
+           name: jenkins-pod
+           labels:
+              type: ci-cd
+              author: intelliqit
+       spec:
+         containers:
+            - name: myjenkins
+              image: jenkins/jenkins
+              resources:
+                  requests:
+                        cpu: "128m"
+                        memory: "200Mi"
+                  limits:
+                        cpu: "256m"
+                        memory: 400Mi"
+...

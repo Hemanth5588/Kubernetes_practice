@@ -9,7 +9,4 @@ spec:
    containers:
      - name: mytomcat
        image: tomee
-       ports:
-          - containerPort: 8080
-            hostPort: 9090
 ...

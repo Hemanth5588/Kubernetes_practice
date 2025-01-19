@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: inmemory-app-deployment
+    labels:
+      app: redis-inmemory-app
+      author: intelliqit
+spec:
+  selector:
+      matchLabels:
+          app: redis-inmemory-app
+          author: intelliqit
+  template:
+     metadata:
+         name: inmemory-app-pod
+         labels:
+            app: redis-inmemory-app
+            author: intelliqit
+     spec:
+         containers:
+           - name: inmemory-app 
+             image: redis
+...

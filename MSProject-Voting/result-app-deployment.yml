@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: result-app-deployment
+   labels:
+      app: nodejs-result-app
+      author: intelliqit
+spec:
+  replicas: 2
+  selector:
+     matchLabels:
+          app: nodejs-result-app
+          author: intelliqit
+  template:
+     metadata:
+         name: result-app-pod
+         labels:
+            app: nodejs-result-app
+            author: intelliqit
+     spec:
+       containers:
+           - name: result-app
+             image: dockersamples/examplevotingapp_result
+...

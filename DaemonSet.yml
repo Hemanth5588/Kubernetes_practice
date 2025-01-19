@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+    name: prometheus-daemonset
+    labels:
+         type: monitoring
+spec:
+  selector:
+     matchLabels:
+          type: monitoring
+  template:
+     metadata:
+       name: ubuntu-prometheus
+       labels:
+          type: monitoring
+     spec:
+        containers:
+          - name: ubuntu-prometheus
+            image: ubuntu/prometheus
+            env:
+             - name: TZ
+               value: UTC
+            ports:
+             - containerPort: 9090
+               hostPort: 9090
+...

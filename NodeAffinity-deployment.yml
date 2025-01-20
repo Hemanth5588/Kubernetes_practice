@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+     name: httpd-na-deployment
+     labels:
+        app: web-app
+        author: intelliqit
+spec:
+  replicas: 120
+  selector:
+      matchLabels:
+            app: web-app
+            author: intelliqit
+  template:
+    metadata:
+        name: httpd-pod
+        labels:
+           app: web-app
+           author: intelliqit
+    spec:
+
+       containers:
+          - name: myhttpd
+            image: httpd
+       affinity:
+         nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: slave2
+                      operator: In
+                      values:
+                         - intelliqit2
+...

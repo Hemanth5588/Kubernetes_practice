@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: httpd-tlrt-deployment
+   labels:
+      app: webserver
+spec:
+  replicas: 2
+  selector:
+     matchLabels:
+          app: webserver
+  template:
+    metadata:
+          name: httpd-tlrt-pod
+          labels:
+             app: webserver
+    spec:
+      containers:
+          - name: myhttpd
+            image: httpd
+      tolerations:
+          - key: slave2
+            operator: Equal
+            value: intelliqit2
+            effect: NoSchedule
+...

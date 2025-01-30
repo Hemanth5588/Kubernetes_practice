@@ -1,0 +1,39 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+      name: tomcat-nodeport-svc
+spec:
+  type: LoadBalancer
+  ports:
+     - name: tcp
+       targetPort: 8080
+       port: 8080
+       nodePort: 30012
+  selector:
+     app: appserver
+     author: HemanthTech
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: tomcat-pod
+   labels:
+      app: appserver
+      author: HemanthTech
+spec:
+   replicas: 3
+   selector:
+       matchLabels:
+             app: appserver
+             author: HemanthTech
+   template:
+      metadata:
+          labels:
+              app: appserver
+              author: HemanthTech
+      spec:
+         containers:
+              - name: mytomcat
+                image: tomee
+...
